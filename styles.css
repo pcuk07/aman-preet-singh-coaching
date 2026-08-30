@@ -291,24 +291,37 @@ img, svg { display: block; max-width: 100%; }
 .hero-grid {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: end;
+  grid-template-areas:
+    "eyebrow eyebrow"
+    "name    photo"
+    "name    side";
+  column-gap: clamp(2rem, 5vw, 4rem);
+  row-gap: 0;
 }
 
-.hero-eyebrow { grid-column: 1 / -1; }
+.hero-eyebrow {
+  grid-area: eyebrow;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
 
 .hero-name {
+  grid-area: name;
+  align-self: end;
   font-size: clamp(3.4rem, 9vw, 7.2rem);
   letter-spacing: -0.01em;
 }
 
 .hero-side {
+  grid-area: side;
+  align-self: end;
   padding-bottom: 0.4rem;
   border-left: 1px solid var(--rule);
   padding-left: clamp(1.2rem, 3vw, 2rem);
 }
 
 .hero-photo {
+  grid-area: photo;
+  align-self: end;
   width: 148px;
   margin: 0 0 1.3rem;
 }
@@ -391,8 +404,18 @@ img, svg { display: block; max-width: 100%; }
 }
 
 @media (max-width: 760px) {
-  .hero-grid { grid-template-columns: 1fr; }
-  .hero-side { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 1.2rem; margin-top: 1.5rem; }
+  .hero-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "eyebrow"
+      "photo"
+      "name"
+      "side";
+  }
+  .hero-eyebrow { margin-bottom: 1.5rem; }
+  .hero-photo { margin-bottom: 1.75rem; }
+  .hero-name { margin-bottom: 1.5rem; }
+  .hero-side { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 1.2rem; }
 }
 
 /* ================= SECTIONS (generic) ================= */
